@@ -102,10 +102,10 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "JangHo Park"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
+  bio              : "I am a MS student @KAIST in Daejeon"
+  location         : "291, Daehak-ro, Yuseong-gu, Daejeon, Republic of Korea"
   email            :
   links:
     - label: "Email"
