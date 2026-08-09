@@ -4,11 +4,10 @@ tagline: Ph.D. Student, KAIST Graduate School of AI
 description: >-
   Jangho Park — Ph.D. student at KAIST (BISPL), advised by Prof. Jong Chul Ye.
   Research on 3D/4D scene generation and world models.
-# Served as a GitHub Pages project site at https://jhq1234.github.io/jangho-me/
-# To move to a custom domain later: set baseurl "" and url to the domain,
-# then add a CNAME file (see README).
+# Served at the root user site https://jhq1234.github.io/
+# For a custom domain later: keep baseurl "", set url to the domain, add a CNAME file.
 url: "https://jhq1234.github.io"
-baseurl: "/jangho-me"
+baseurl: ""
 lang: en
 
 # --- Profile (left rail) ---
