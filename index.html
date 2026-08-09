@@ -79,6 +79,25 @@ layout: default
     </section>
 
     <section>
+      <p class="eyebrow">Experience</p>
+      <ul class="exp">
+        {%- for e in site.data.experience -%}
+        <li>
+          <span class="when">{{ e.when }}</span>
+          <div class="exp-body">
+            <p class="exp-role"><strong>{{ e.role }}</strong>, {{ e.org }}</p>
+            <p class="exp-meta">
+              {%- if e.period %}{{ e.period }}{% endif -%}
+              {%- if e.team %} &middot; {{ e.team }}{% endif -%}
+              {%- if e.host %} &middot; Host: {{ e.host }}{% endif -%}
+            </p>
+          </div>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </section>
+
+    <section>
       <p class="eyebrow">Academic Service</p>
       <p class="service"><strong>Reviewer</strong> &nbsp; {{ site.service }}</p>
     </section>

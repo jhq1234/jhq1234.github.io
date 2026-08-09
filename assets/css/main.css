@@ -169,6 +169,22 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 .pub-links a::before { content: "["; color: var(--faint); }
 .pub-links a::after { content: "]"; color: var(--faint); }
 
+/* experience */
+.exp { list-style: none; margin: 0; padding: 0; }
+.exp li {
+  display: grid; grid-template-columns: 78px 1fr; gap: 1rem;
+  padding: .6rem 0; border-bottom: 1px solid var(--line-soft);
+}
+.exp li:last-child { border-bottom: 0; }
+.exp .when {
+  font-family: var(--sans); font-size: .76rem; font-weight: 600;
+  letter-spacing: .03em; text-transform: uppercase; color: var(--faint); padding-top: .18rem;
+}
+.exp-body { min-width: 0; }
+.exp-role { margin: 0 0 .12rem; font-size: 1.02rem; line-height: 1.3; }
+.exp-role strong { font-weight: 600; }
+.exp-meta { margin: 0; font-family: var(--sans); font-size: .84rem; color: var(--muted); }
+
 .service { font-size: .95rem; color: var(--muted); margin: 0; max-width: 62ch; }
 .service strong { color: var(--ink); font-family: var(--sans); font-size: .82rem; font-weight: 600; letter-spacing: .02em; }
 
