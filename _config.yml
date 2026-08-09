@@ -1,0 +1,41 @@
+# --- Site ---
+title: Jangho Park
+tagline: Ph.D. Student, KAIST Graduate School of AI
+description: >-
+  Jangho Park — Ph.D. student at KAIST (BISPL), advised by Prof. Jong Chul Ye.
+  Research on 3D/4D scene generation and world models.
+url: "https://jangho.me"
+baseurl: ""
+lang: en
+
+# --- Profile (left rail) ---
+profile:
+  name: Jangho Park
+  initials: JP            # shown when image is empty
+  image: "assets/img/profile.jpg"   # drop your photo here; falls back to initials if missing
+  role_lines:
+    - 'Ph.D. Student, <strong>KAIST</strong> Graduate School of AI'
+    - 'BISPL &middot; advised by Prof. Jong Chul Ye'
+    - '<span class="faint">ex&nbsp;Research Intern, NAVER AI Lab</span>'
+  emails:
+    - jhq1234@kaist.ac.kr
+    - kpr9797@gmail.com
+
+# --- Links (left rail) ---
+links:
+  - { key: Scholar, name: Google Scholar,    url: "https://scholar.google.com/citations?user=OC9JTDMAAAAJ&hl=en" }
+  - { key: Code,    name: GitHub,            url: "https://github.com/jhq1234" }
+  - { key: Prof,    name: LinkedIn,          url: "https://www.linkedin.com/in/jhpark9916/" }
+  - { key: Doc,     name: Curriculum Vitae,  url: "https://drive.google.com/file/d/1_48msCSdWQFongXfuNVTxJJ7zVGWcBbt/view" }
+
+# --- Academic service ---
+service: "NeurIPS 2025 &middot; ICLR 2025, 2026 &middot; ICCV 2025 &middot; CVPR 2026 &middot; ECCV 2026"
+
+# --- Build ---
+markdown: kramdown
+permalink: pretty
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

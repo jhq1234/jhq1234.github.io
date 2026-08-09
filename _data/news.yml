@@ -1,0 +1,12 @@
+# Newest first. `html` allows inline markup.
+- when: "2026"
+  html: '<em>FlowLong</em> — inference-time long video generation via manifold-constrained Tweedie matching — is out on arXiv.'
+
+- when: "2026"
+  html: '<em>Zero4D</em> accepted to <strong class="sans-strong">CVPR Findings 2026</strong>.'
+
+- when: "2025"
+  html: 'Joined NAVER AI Lab, Generation Research Team, as a Research Intern (Mar–Sep).'
+
+- when: "2024"
+  html: '<em>ED-NeRF</em> presented at <strong class="sans-strong">ICLR 2024</strong>.'

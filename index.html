@@ -1,0 +1,104 @@
+---
+layout: default
+---
+{%- assign me = site.profile.name -%}
+<div class="wrap">
+  <aside class="rail">
+    <div class="portrait" aria-hidden="true">
+      {%- if site.profile.image and site.profile.image != "" -%}
+        <img src="{{ site.profile.image | relative_url }}" alt="{{ site.profile.name }}" onerror="this.remove()">
+      {%- endif -%}
+      <span class="ini">{{ site.profile.initials }}</span>
+    </div>
+    <h1 class="name">{{ site.profile.name }}</h1>
+    <p class="role">
+      {%- for line in site.profile.role_lines -%}
+        {{ line }}{% unless forloop.last %}<br>{% endunless %}
+      {%- endfor -%}
+    </p>
+    <ul class="links">
+      {%- for l in site.links -%}
+      <li><a href="{{ l.url }}"><span class="k">{{ l.key }}</span>{{ l.name }}</a></li>
+      {%- endfor -%}
+    </ul>
+    <p class="email">
+      {%- for e in site.profile.emails -%}
+        <a href="mailto:{{ e }}">{{ e }}</a>{% unless forloop.last %}<br>{% endunless %}
+      {%- endfor -%}
+    </p>
+  </aside>
+
+  <main class="col">
+    <section class="bio">
+      <p class="eyebrow">About</p>
+      <p>I am a Ph.D. student at the <a href="https://gsai.kaist.ac.kr/">KAIST Graduate School of AI</a>, working in the Bio Imaging, Signal Processing &amp; Learning Lab (BISPL) under the supervision of Prof. Jong Chul Ye.</p>
+      <p>My research lives at the intersection of <strong>3D/4D scene generation</strong> and <strong>world models</strong> — building generative systems that reason about scenes across space and time. I am especially interested in coaxing 4D structure and long-horizon video out of off-the-shelf diffusion models, largely without additional training.</p>
+      <p>Previously I was a Research Intern at NAVER AI Lab (Generation Research Team), hosted by Jin-Hwa Kim.</p>
+    </section>
+
+    <section>
+      <p class="eyebrow">News</p>
+      <ul class="news">
+        {%- for n in site.data.news -%}
+        <li><span class="when">{{ n.when }}</span><span>{{ n.html }}</span></li>
+        {%- endfor -%}
+      </ul>
+    </section>
+
+    <section>
+      <p class="eyebrow">Selected Publications</p>
+      {%- for p in site.data.publications -%}
+      <article class="pub">
+        <div class="thumb{% if p.video and p.video != '' %} has-video{% endif %}"{% if p.video and p.video != '' and p.ratio %} style="aspect-ratio: {{ p.ratio }}"{% endif %}>
+          {%- if p.video and p.video != "" -%}
+            <video class="hoverplay" src="{{ p.video | relative_url }}"
+                   muted loop playsinline preload="none" aria-label="{{ p.label }} preview"></video>
+            <img class="poster" src="{{ p.poster | relative_url }}" alt="{{ p.label }}" onerror="this.remove()">
+          {%- elsif p.thumb and p.thumb != "" -%}
+            <img src="{{ p.thumb | relative_url }}" alt="{{ p.label }}">
+          {%- else -%}
+            <span>{{ p.label }}</span>
+          {%- endif -%}
+        </div>
+        <div class="pub-body">
+          <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
+          {%- capture bolded -%}<span class="me">{{ me }}</span>{%- endcapture -%}
+          <p class="authors">{{ p.authors | replace: me, bolded }}</p>
+          <div class="meta">
+            <span class="venue">{{ p.venue }}</span>
+            {%- if p.links and p.links.size > 0 -%}
+            <span class="dot">·</span>
+            <span class="pub-links">
+              {%- for lk in p.links -%}<a href="{{ lk.url }}">{{ lk.name }}</a>{%- endfor -%}
+            </span>
+            {%- endif -%}
+          </div>
+        </div>
+      </article>
+      {%- endfor -%}
+    </section>
+
+    <section>
+      <p class="eyebrow">Academic Service</p>
+      <p class="service"><strong>Reviewer</strong> &nbsp; {{ site.service }}</p>
+    </section>
+  </main>
+</div>
+
+<script>
+  // Thumbnails: show poster still, play the clip while hovered.
+  (function () {
+    var vids = document.querySelectorAll('video.hoverplay');
+    vids.forEach(function (v) {
+      var box = v.closest('.pub') || v.parentElement;
+      box.addEventListener('mouseenter', function () {
+        if (v.preload === 'none') { v.preload = 'auto'; v.load(); }
+        var p = v.play(); if (p && p.catch) { p.catch(function () {}); }
+      });
+      box.addEventListener('mouseleave', function () {
+        v.pause();
+        try { v.currentTime = 0; } catch (e) {}
+      });
+    });
+  })();
+</script>

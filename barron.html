@@ -1,0 +1,56 @@
+---
+layout: barron
+title: Jangho Park
+permalink: /barron/
+---
+{%- assign me = site.profile.name -%}
+<div class="page">
+  <header class="head">
+    <div class="photo">
+      {%- if site.profile.image and site.profile.image != "" -%}
+        <img src="{{ site.profile.image | relative_url }}" alt="{{ site.profile.name }}"
+             onerror="this.remove()">
+      {%- endif -%}
+      <span class="ini">{{ site.profile.initials }}</span>
+    </div>
+    <h1 class="name">{{ site.profile.name }}</h1>
+    <p class="affil">Ph.D. Student, <strong>KAIST</strong> Graduate School of AI &middot; BISPL</p>
+    <p class="affil"><span class="sub">advised by Prof. Jong Chul Ye &middot; ex Research Intern, NAVER AI Lab</span></p>
+    <p class="navlinks">
+      {%- for e in site.profile.emails limit:1 -%}<a href="mailto:{{ e }}">Email</a>{%- endfor -%}
+      {%- for l in site.links -%}
+        <span class="sep">/</span><a href="{{ l.url }}">{{ l.name }}</a>
+      {%- endfor -%}
+    </p>
+  </header>
+
+  <section class="bio">
+    <p>I am a Ph.D. student at the <a href="https://gsai.kaist.ac.kr/">KAIST Graduate School of AI</a> (BISPL), advised by Prof. Jong Chul Ye. My research is at the intersection of <strong>3D/4D scene generation</strong> and <strong>world models</strong> — coaxing 4D structure and long-horizon video out of off-the-shelf diffusion models, largely without additional training. Previously I was a Research Intern at NAVER AI Lab (Generation Research Team), hosted by Jin-Hwa Kim.</p>
+  </section>
+
+  <h2 class="sec">Research</h2>
+  <div class="pubs">
+    {%- for p in site.data.publications -%}
+    {%- capture bolded -%}<span class="me">{{ me }}</span>{%- endcapture -%}
+    <div class="row">
+      <div class="thumb">
+        {%- if p.thumb and p.thumb != "" -%}
+          <img src="{{ p.thumb | relative_url }}" alt="{{ p.label }}">
+        {%- else -%}
+          <span>{{ p.label }}</span>
+        {%- endif -%}
+      </div>
+      <div class="info">
+        <p class="title"><a href="{{ p.url }}">{{ p.title }}</a></p>
+        <p class="auth">{{ p.authors | replace: me, bolded }}</p>
+        <p class="ven">{{ p.venue }}</p>
+        <p class="lk">{% for lk in p.links %}<a href="{{ lk.url }}">{{ lk.name }}</a>{% endfor %}</p>
+        {%- if p.blurb -%}<p class="blurb">{{ p.blurb }}</p>{%- endif -%}
+      </div>
+    </div>
+    {%- endfor -%}
+  </div>
+
+  <h2 class="sec">Academic Service</h2>
+  <p class="service"><strong>Reviewer</strong> &mdash; {{ site.service }}</p>
+</div>
