@@ -68,13 +68,13 @@ layout: default
       <p class="eyebrow">Selected Publications</p>
       {%- for p in site.data.publications -%}
       <article class="pub">
-        <div class="thumb{% if p.video and p.video != '' %} has-video{% endif %}"{% if p.video and p.video != '' and p.ratio %} style="aspect-ratio: {{ p.ratio }}"{% endif %}>
+        <div class="thumb{% if p.video and p.video != '' %} has-video{% endif %}">
           {%- if p.video and p.video != "" -%}
             <video class="hoverplay" src="{{ p.video | relative_url }}"
                    muted loop playsinline preload="none" aria-label="{{ p.label }} preview"></video>
             <img class="poster" src="{{ p.poster | relative_url }}" alt="{{ p.label }}" onerror="this.remove()">
           {%- elsif p.thumb and p.thumb != "" -%}
-            <img src="{{ p.thumb | relative_url }}" alt="{{ p.label }}">
+            <img class="fig" src="{{ p.thumb | relative_url }}" alt="{{ p.label }}">
           {%- else -%}
             <span>{{ p.label }}</span>
           {%- endif -%}
@@ -82,7 +82,7 @@ layout: default
         <div class="pub-body">
           <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
           {%- capture bolded -%}<span class="me">{{ me }}</span>{%- endcapture -%}
-          <p class="authors">{{ p.authors | replace: me, bolded }}</p>
+          <p class="authors">{{ p.authors | replace: me, bolded }}{% if p.note and p.note != "" %}<span class="note">{{ p.note }}</span>{% endif %}</p>
           <div class="meta">
             <span class="venue">{{ p.venue }}</span>
             {%- if p.links and p.links.size > 0 -%}

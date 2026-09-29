@@ -3,6 +3,41 @@
 #   thumb   : image path under assets/img/, e.g. thumb/flowlong.jpg
 #             leave "" to show the `label` placeholder box instead
 #   label   : short text shown in the placeholder box when thumb is empty
+#   note    : optional line under the authors, e.g. "* Equal contribution"
+
+- title: "Adjoint Guidance Flow: Amortized Critic Guidance for VLA Policies"
+  authors: "Jeongsol Kim, Youngjun Jun, Kyumin Choi, Youngmin Kim, Seonghyun Jin, Sunwoo Park, Jangho Park, Kwanyoung Kim, Jong Chul Ye"
+  venue: "arXiv 2026"
+  thumb: "assets/img/thumb/agf.jpg"
+  label: "AGF"
+  url: "https://arxiv.org/abs/2609.34944"
+  links:
+    - { name: Paper,   url: "https://arxiv.org/abs/2609.34944" }
+
+- title: "Don't Throw Away the Tail: Action Upcycling for Policy Acceleration"
+  authors: "Taesung Kwon*, Jangho Park*, Sunwoo Park, Youngmin Kim, Seonghyun Jin, Youngjun Jun, Kyumin Choi, Jong Chul Ye"
+  note: "* Equal contribution"
+  venue: "arXiv 2026"
+  thumb: ""
+  label: "Action Upcycling"
+  video: "assets/media/upcycling.mp4"
+  poster: "assets/media/upcycling.jpg"
+  url: "https://acupcycling.github.io/"
+  links:
+    - { name: Paper,   url: "https://arxiv.org/abs/2609.34911" }
+    - { name: Project, url: "https://acupcycling.github.io/" }
+
+- title: "Dynamic Manipulation with World-Action Models via Counterfactual Planning"
+  authors: "Sunwoo Park, Wonbin Lee, Seonghyun Jin, Youngmin Kim, Jangho Park, Jong Chul Ye"
+  venue: "arXiv 2026"
+  thumb: ""
+  label: "DPP"
+  video: "assets/media/dpp.mp4"
+  poster: "assets/media/dpp.jpg"
+  url: "https://methoder00.github.io/DPP/"
+  links:
+    - { name: Paper,   url: "https://arxiv.org/abs/2609.33172" }
+    - { name: Project, url: "https://methoder00.github.io/DPP/" }
 
 - title: "FlowLong: Inference-time Long Video Generation via Manifold-constrained Tweedie Matching"
   authors: "Jangho Park, Geon Yeong Park, Gihyun Kwon, Jong Chul Ye"
@@ -11,7 +46,6 @@
   label: "FlowLong"
   video: "assets/media/flowlong.mp4"
   poster: "assets/media/flowlong.jpg"
-  ratio: "480 / 276"
   url: "https://flowlong-video.github.io/"
   blurb: "Generates long videos at inference time by keeping the diffusion trajectory on the data manifold via Tweedie matching — no retraining."
   links:
@@ -25,7 +59,6 @@
   label: "Zero4D"
   video: "assets/media/zero4d.mp4"
   poster: "assets/media/zero4d.jpg"
-  ratio: "480 / 270"
   url: "https://zero4dvid.github.io/"
   blurb: "Turns a single video into a 4D (dynamic, view-consistent) scene using an off-the-shelf video diffusion model — completely training-free."
   links:
@@ -39,7 +72,6 @@
   label: "Unified Editing"
   video: "assets/media/unified.mp4"
   poster: "assets/media/unified.jpg"
-  ratio: "480 / 270"
   url: "https://unifyediting.github.io/"
   blurb: "One disentangled self-attention injection scheme edits panoramas, 3D scenes, and videos within a single unified framework."
   links:
@@ -53,7 +85,6 @@
   label: "ED-NeRF"
   video: "assets/media/ednerf.mp4"
   poster: "assets/media/ednerf.jpg"
-  ratio: "480 / 360"
   url: "https://jhq1234.github.io/ed-nerf.github.io/"
   blurb: "Text-guided editing of a 3D scene by operating NeRF in the latent space of a diffusion model for efficient, targeted edits."
   links:

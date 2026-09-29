@@ -148,28 +148,20 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 .thumb img,
 .thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .thumb video { background: var(--thumb-a); }
-/* full frame, no crop: real clips keep their own aspect ratio (set inline
-   via style="aspect-ratio:W/H" so the box is correct even before load) */
-/* the .thumb container carries the aspect-ratio (inline style="aspect-ratio:W/H");
-   video + poster image both fill it absolutely. The poster rests on top and fades
-   out on hover so the resting thumbnail is ALWAYS the poster image — even after the
-   clip has played (a bare <video> would otherwise keep showing its first frame). */
-.thumb.has-video { aspect-ratio: auto; background: var(--thumb-a); }
+/* paper figure as thumbnail: keep the whole figure, white paper background */
+.thumb img.fig { object-fit: contain; background: #fff; }
+/* every thumbnail uses the same 16:10 .thumb box; video + poster image both fill it
+   absolutely (edges cropped). The poster rests on top and fades out on hover so the
+   resting thumbnail is ALWAYS the poster image — even after the clip has played
+   (a bare <video> would otherwise keep showing its first frame). */
+.thumb.has-video { background: var(--thumb-a); }
 .thumb.has-video video,
 .thumb.has-video img.poster {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
 .thumb.has-video video { z-index: 0; }
 .thumb.has-video img.poster { z-index: 1; transition: opacity .18s ease; }
 .pub:hover .thumb.has-video img.poster { opacity: 0; }
-/* subtle "hover to play" affordance */
-.thumb.has-video::after {
-  content: "▶"; position: absolute; right: 6px; bottom: 5px; z-index: 2;
-  font-family: var(--sans); font-size: .6rem; line-height: 1;
-  color: #fff; background: rgba(0,0,0,.45); padding: 3px 5px; border-radius: 3px;
-  opacity: .85; transition: opacity .15s ease; pointer-events: none;
-}
-.pub:hover .thumb.has-video::after { opacity: 0; }
 .thumb span {
   font-family: var(--sans); font-size: .64rem; font-weight: 600;
   letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
@@ -184,6 +176,7 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 .pub h3 a:hover { color: var(--accent); }
 .authors { font-size: .92rem; color: var(--muted); margin: 0 0 .5rem; }
 .authors .me { color: var(--ink); font-weight: 600; }
+.authors .note { display: block; font-size: .8rem; font-style: italic; margin-top: .15rem; }
 .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
 .venue {
   font-family: var(--sans); font-size: .72rem; font-weight: 600; letter-spacing: .02em;
