@@ -20,7 +20,7 @@
   venue: "arXiv 2026"
   thumb: ""
   label: "Action Upcycling"
-  video: "assets/media/upcycling.mp4"
+  video: "assets/media/upcycling_4x.mp4"
   poster: "assets/media/upcycling.jpg"
   url: "https://acupcycling.github.io/"
   links:
@@ -32,8 +32,8 @@
   venue: "arXiv 2026"
   thumb: ""
   label: "DPP"
-  video: "assets/media/dpp.mp4"
-  poster: "assets/media/dpp.jpg"
+  video: "assets/media/dpp_fastwam_4x.mp4"
+  poster: "assets/media/dpp_fastwam.jpg"
   url: "https://methoder00.github.io/DPP/"
   links:
     - { name: Paper,   url: "https://arxiv.org/abs/2609.33172" }
@@ -57,8 +57,8 @@
   venue: "CVPR Findings 2026"
   thumb: ""
   label: "Zero4D"
-  video: "assets/media/zero4d.mp4"
-  poster: "assets/media/zero4d.jpg"
+  video: "assets/media/zero4d_grid.mp4"
+  poster: "assets/media/zero4d_grid.jpg"
   url: "https://zero4dvid.github.io/"
   blurb: "Turns a single video into a 4D (dynamic, view-consistent) scene using an off-the-shelf video diffusion model — completely training-free."
   links:

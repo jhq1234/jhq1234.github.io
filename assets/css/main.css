@@ -135,13 +135,14 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 
 /* publications */
 .pub {
-  display: grid; grid-template-columns: 148px 1fr; gap: 1.3rem;
-  padding: 1.35rem 0; border-top: 1px solid var(--line-soft);
-  align-items: start;   /* don't stretch the thumbnail to the text height */
+  /* sizes follow star-kwon.github.io: 174x123 thumbnail, 30px gap, 16px text */
+  display: grid; grid-template-columns: 174px 1fr; gap: 30px;
+  padding: 10px 0; border-top: 1px solid var(--line-soft);
+  align-items: start;   /* text starts at the top edge of the thumbnail */
 }
 .pub:first-of-type { border-top: 0; padding-top: .4rem; }
 .thumb {
-  aspect-ratio: 16 / 10; border-radius: 7px; border: 1px solid var(--line);
+  aspect-ratio: 174 / 123; border-radius: 8px; border: 1px solid var(--line);
   background: linear-gradient(135deg, var(--thumb-b), var(--thumb-a));
   display: grid; place-items: center; overflow: hidden; position: relative;
 }
@@ -150,7 +151,7 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 .thumb video { background: var(--thumb-a); }
 /* paper figure as thumbnail: keep the whole figure, white paper background */
 .thumb img.fig { object-fit: contain; background: #fff; }
-/* every thumbnail uses the same 16:10 .thumb box; video + poster image both fill it
+/* every thumbnail uses the same 174:123 .thumb box; video + poster image both fill it
    absolutely (edges cropped). The poster rests on top and fades out on hover so the
    resting thumbnail is ALWAYS the poster image — even after the clip has played
    (a bare <video> would otherwise keep showing its first frame). */
@@ -169,12 +170,12 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 }
 .pub-body { min-width: 0; }
 .pub h3 {
-  font-size: 1.05rem; font-weight: 600; line-height: 1.32;
-  margin: 0 0 .3rem; letter-spacing: -.005em; text-wrap: pretty;
+  font-size: 16px; font-weight: 700; line-height: 24px;
+  margin: 0; letter-spacing: -.005em; text-wrap: pretty;
 }
 .pub h3 a { color: var(--ink); }
 .pub h3 a:hover { color: var(--accent); }
-.authors { font-size: .92rem; color: var(--muted); margin: 0 0 .5rem; }
+.authors { font-size: 16px; line-height: 24px; color: var(--muted); margin: 0 0 4px; }
 .authors .me { color: var(--ink); font-weight: 600; }
 .authors .note { display: block; font-size: .8rem; font-style: italic; margin-top: .15rem; }
 .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
