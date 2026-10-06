@@ -32,7 +32,7 @@ layout: default
     <section class="bio">
       <p class="eyebrow">About</p>
       <p>I am a Ph.D. student at the <a href="https://gsai.kaist.ac.kr/">KAIST Graduate School of AI</a>, working in the Bio Imaging, Signal Processing &amp; Learning Lab (BISPL) under the supervision of Prof. Jong Chul Ye.</p>
-      <p>My research lives at the intersection of <strong>3D/4D scene generation</strong> and <strong>world models</strong> — building generative systems that reason about scenes across space and time. Recently, I have been working on extending video generation models into world models: turning the rich visual priors these models already learn into structured, predictive representations of 3D dynamics that can be simulated and acted upon.</p>
+      <p>My research focuses on <strong>generative models</strong> (3D/4D, videos) and <strong>robotics</strong>: how the dynamic world looks, how it changes over time, and how agents <span class="nowrap">act in it.</span></p>
       <p>Previously I was a Research Intern at NAVER AI Lab (Generation Research Team), hosted by Jin-Hwa Kim.</p>
     </section>
 
@@ -83,14 +83,14 @@ layout: default
           <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
           {%- capture bolded -%}<span class="me">{{ me }}</span>{%- endcapture -%}
           <p class="authors">{{ p.authors | replace: me, bolded }}{% if p.note and p.note != "" %}<span class="note">{{ p.note }}</span>{% endif %}</p>
+          <p class="venue-line">{{ p.venue }}</p>
           <div class="meta">
-            <span class="venue">{{ p.venue }}</span>
             {%- if p.links and p.links.size > 0 -%}
-            <span class="dot">·</span>
             <span class="pub-links">
               {%- for lk in p.links -%}<a href="{{ lk.url }}">{{ lk.name }}</a>{%- endfor -%}
             </span>
             {%- endif -%}
+            {%- if p.award -%}<a class="award" href="{{ p.award.url }}">{{ p.award.text }}</a>{%- endif -%}
           </div>
         </div>
       </article>

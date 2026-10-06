@@ -16,12 +16,10 @@ profile:
   initials: JP            # shown when image is empty
   image: "assets/img/profile.jpg"   # drop your photo here; falls back to initials if missing
   role_lines:
-    - 'Ph.D. Student, <strong>KAIST</strong> Graduate School of AI'
-    - 'BISPL &middot; advised by Prof. Jong Chul Ye'
-    - '<span class="faint">ex&nbsp;Research Intern, NAVER AI Lab</span>'
+    - 'Ph.D. Student'
+    - '<strong>KAIST</strong> Graduate School of AI'
   emails:
     - jhq1234@kaist.ac.kr
-    - kpr9797@gmail.com
 
 # --- Links (left rail) ---
 links:

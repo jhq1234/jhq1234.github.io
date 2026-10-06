@@ -4,10 +4,22 @@
 #             leave "" to show the `label` placeholder box instead
 #   label   : short text shown in the placeholder box when thumb is empty
 #   note    : optional line under the authors, e.g. "* Equal contribution"
+#   venue   : full venue line shown in italics under the authors, e.g. "International Conference on Learning Representations (ICLR), 2024."
+#   award   : optional { text, url } shown in color after the links, e.g. an oral or a paper award
+
+- title: "FastOPD: On-Policy Distillation for Lightweight VLA Deployment"
+  authors: "Yoojin Oh, Jeongsol Kim, Yeonwoo Seo, Jangho Park, Seonghyun Jin, Sunwoo Park, Youngmin Kim, Youngjun Jun, Kyumin Choi, Jong Chul Ye"
+  venue: "arXiv preprint, 2026."
+  thumb: "assets/img/thumb/fastopd_method.jpg"
+  label: "FastOPD"
+  url: "https://fastopd.github.io/"
+  links:
+    - { name: Paper,   url: "https://arxiv.org/abs/2610.02832" }
+    - { name: Project, url: "https://fastopd.github.io/" }
 
 - title: "Adjoint Guidance Flow: Amortized Critic Guidance for VLA Policies"
   authors: "Jeongsol Kim, Youngjun Jun, Kyumin Choi, Youngmin Kim, Seonghyun Jin, Sunwoo Park, Jangho Park, Kwanyoung Kim, Jong Chul Ye"
-  venue: "arXiv 2026"
+  venue: "arXiv preprint, 2026."
   thumb: "assets/img/thumb/agf.jpg"
   label: "AGF"
   url: "https://arxiv.org/abs/2609.34944"
@@ -17,7 +29,7 @@
 - title: "Don't Throw Away the Tail: Action Upcycling for Policy Acceleration"
   authors: "Taesung Kwon*, Jangho Park*, Sunwoo Park, Youngmin Kim, Seonghyun Jin, Youngjun Jun, Kyumin Choi, Jong Chul Ye"
   note: "* Equal contribution"
-  venue: "arXiv 2026"
+  venue: "arXiv preprint, 2026."
   thumb: ""
   label: "Action Upcycling"
   video: "assets/media/upcycling_4x.mp4"
@@ -29,7 +41,7 @@
 
 - title: "Dynamic Manipulation with World-Action Models via Counterfactual Planning"
   authors: "Sunwoo Park, Wonbin Lee, Seonghyun Jin, Youngmin Kim, Jangho Park, Jong Chul Ye"
-  venue: "arXiv 2026"
+  venue: "arXiv preprint, 2026."
   thumb: ""
   label: "DPP"
   video: "assets/media/dpp_fastwam_4x.mp4"
@@ -41,7 +53,8 @@
 
 - title: "FlowLong: Inference-time Long Video Generation via Manifold-constrained Tweedie Matching"
   authors: "Jangho Park, Geon Yeong Park, Gihyun Kwon, Jong Chul Ye"
-  venue: "arXiv 2026"
+  venue: "arXiv preprint, 2026."
+  award: { text: "Oral, AVGenL Workshop @ ECCV 2026", url: "https://avgen123.github.io/eccv26.html" }
   thumb: ""
   label: "FlowLong"
   video: "assets/media/flowlong.mp4"
@@ -54,7 +67,7 @@
 
 - title: "Zero4D: Training-Free 4D Video Generation From a Single Video Using Off-the-Shelf Video Diffusion"
   authors: "Jangho Park, Taesung Kwon, Jong Chul Ye"
-  venue: "CVPR Findings 2026"
+  venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Findings, 2026."
   thumb: ""
   label: "Zero4D"
   video: "assets/media/zero4d_grid.mp4"
@@ -67,7 +80,7 @@
 
 - title: "Unified Editing of Panorama, 3D Scenes, and Videos Through Disentangled Self-Attention Injection"
   authors: "Gihyun Kwon, Jangho Park, Jong Chul Ye"
-  venue: "arXiv 2024"
+  venue: "arXiv preprint, 2024."
   thumb: ""
   label: "Unified Editing"
   video: "assets/media/unified.mp4"
@@ -80,7 +93,7 @@
 
 - title: "ED-NeRF: Efficient Text-guided Editing of 3D Scene Using Latent Space NeRF"
   authors: "Jangho Park, Gihyun Kwon, Jong Chul Ye"
-  venue: "ICLR 2024"
+  venue: "International Conference on Learning Representations (ICLR), 2024."
   thumb: ""
   label: "ED-NeRF"
   video: "assets/media/ednerf.mp4"
