@@ -17,6 +17,16 @@
     - { name: Paper,   url: "https://arxiv.org/abs/2610.02832" }
     - { name: Project, url: "https://fastopd.github.io/" }
 
+- title: "DriftOPD: Sequence-Level Reverse-KL Distillation for One-Step VLA Policies"
+  authors: "Youngjun Jun, Kyumin Choi, Youngmin Kim, Seonghyun Jin, Sunwoo Park, Jangho Park, Jong Chul Ye"
+  venue: "arXiv preprint, 2026."
+  thumb: "assets/img/thumb/driftopd_fig1b.jpg"
+  label: "DriftOPD"
+  url: "https://yj-jun.github.io/DriftOPD/"
+  links:
+    - { name: Paper,   url: "https://arxiv.org/abs/2610.00317" }
+    - { name: Project, url: "https://yj-jun.github.io/DriftOPD/" }
+
 - title: "Adjoint Guidance Flow: Amortized Critic Guidance for VLA Policies"
   authors: "Jeongsol Kim, Youngjun Jun, Kyumin Choi, Youngmin Kim, Seonghyun Jin, Sunwoo Park, Jangho Park, Kwanyoung Kim, Jong Chul Ye"
   venue: "arXiv preprint, 2026."

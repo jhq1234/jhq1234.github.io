@@ -1,6 +1,6 @@
 # Newest first. `html` allows inline markup.
 - when: "2026"
-  html: '<em>FlowLong</em> — inference-time long video generation via manifold-constrained Tweedie matching — is out on arXiv.'
+  html: '<em>FlowLong</em> selected as an <strong class="sans-strong">Oral</strong> at the AVGenL Workshop @ ECCV 2026.'
 
 - when: "2026"
   html: '<em>Zero4D</em> accepted to <strong class="sans-strong">CVPR Findings 2026</strong>.'

@@ -111,8 +111,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-
 section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
 
 .eyebrow {
-  font-family: var(--sans); font-size: .72rem; font-weight: 600;
-  letter-spacing: .13em; text-transform: uppercase; color: var(--faint);
+  font-family: var(--sans); font-size: 1rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
   margin: 0 0 1.1rem; display: flex; align-items: center; gap: .8rem;
 }
 .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); }
