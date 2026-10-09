@@ -1,0 +1,53 @@
+---
+layout: default
+title: Robot Build · Jangho Park
+permalink: /robot/
+---
+<div class="rb">
+  <p class="rb-back"><a href="{{ '/' | relative_url }}">&larr; Jangho Park</a></p>
+
+  <header class="rb-head">
+    <p class="eyebrow">Side Project · Undergraduate Capstone, 2021</p>
+    <h1>Autonomous Water-Cleaning Robot for Low-Clearance Spaces</h1>
+    <p class="rb-lede">Spaces too low for a person to enter are hard to clean by hand. This tracked robot maps such a space with a 2D LiDAR, explores it on its own, and sprays water as it drives.</p>
+  </header>
+
+  <figure class="rb-hero">
+    <video class="autoplay" src="{{ '/assets/robot/clean_4x.mp4' | relative_url }}" poster="{{ '/assets/robot/clean_4x.jpg' | relative_url }}"
+           muted loop playsinline preload="metadata" aria-label="Robot spraying water along a rooftop corner, 4x speed"></video>
+    <figcaption>Cleaning run along a rooftop corner, October 2021 (4&times; speed).</figcaption>
+  </figure>
+
+  <section>
+    <p class="eyebrow">Overview</p>
+    <div class="rb-prose">
+      <p>Our two-person team built this robot from scratch. We designed the tracked aluminium frame in CAD and machined it on a CNC, then put the battery, a Jetson Nano, the motor driver and a solenoid-valve water spray onto it. On the Jetson we set up ROS so the robot maps the space with a 2D LiDAR, explores it on its own and drives its motors over serial.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Build log</p>
+    <div class="rb-grid">
+      <figure><img src="{{ '/assets/robot/build.jpg' | relative_url }}" alt="Assembled robot frame with tracks and enclosure" loading="lazy"></figure>
+      <figure><video class="autoplay" src="{{ '/assets/robot/spray_test.mp4' | relative_url }}" poster="{{ '/assets/robot/spray_test.jpg' | relative_url }}" muted loop playsinline preload="none" aria-label="Robot spraying water while driving"></video></figure>
+      <figure><video class="autoplay" src="{{ '/assets/robot/slam_8x.mp4' | relative_url }}" poster="{{ '/assets/robot/slam_8x.jpg' | relative_url }}" muted loop playsinline preload="none" aria-label="RViz map growing during exploration"></video></figure>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Play clips only while they are on screen.
+  (function () {
+    var vids = document.querySelectorAll('video.autoplay');
+    if (!('IntersectionObserver' in window)) { vids.forEach(function (v) { v.preload = 'auto'; v.play().catch(function () {}); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.25 });
+    vids.forEach(function (v) { io.observe(v); });
+  })();
+</script>

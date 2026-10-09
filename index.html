@@ -98,6 +98,25 @@ layout: default
     </section>
 
     <section>
+      <p class="eyebrow">Side Project</p>
+      <article class="pub build">
+        <a class="thumb has-video" href="{{ '/robot/' | relative_url }}">
+          <video class="hoverplay" src="{{ '/assets/robot/hero.mp4' | relative_url }}"
+                 muted loop playsinline preload="none" aria-label="Robot demo preview"></video>
+          <img class="poster" src="{{ '/assets/robot/side.jpg' | relative_url }}" alt="Tracked cleaning autonomous robot">
+        </a>
+        <div class="pub-body">
+          <h3><a href="{{ '/robot/' | relative_url }}">Autonomous Water-Cleaning Robot for Low-Clearance Spaces</a></h3>
+          <p class="authors">A full-stack robot built from the ground up: both the hardware and the software were designed from scratch, from the chassis and electronics to ROS-based autonomous navigation.</p>
+          <p class="venue-line">Undergraduate Capstone Project.</p>
+          <div class="meta">
+            <span class="pub-links"><a href="{{ '/robot/' | relative_url }}">Details</a></span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section>
       <p class="eyebrow">Academic Service</p>
       <p class="service"><strong>Reviewer</strong> &nbsp; {{ site.service }}</p>
     </section>

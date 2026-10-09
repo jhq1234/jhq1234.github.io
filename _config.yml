@@ -29,7 +29,7 @@ links:
   - { key: Doc,     name: Curriculum Vitae,  url: "https://drive.google.com/file/d/1_48msCSdWQFongXfuNVTxJJ7zVGWcBbt/view" }
 
 # --- Academic service ---
-service: "NeurIPS 2025 &middot; ICLR 2025, 2026 &middot; ICCV 2025 &middot; CVPR 2026 &middot; ECCV 2026"
+service: "NeurIPS 2025, 2026 &middot; ICLR 2025, 2026 &middot; ICCV 2025 &middot; CVPR 2026 &middot; ECCV 2026 &middot; SIGGRAPH Asia 2026"
 
 # --- Build ---
 markdown: kramdown

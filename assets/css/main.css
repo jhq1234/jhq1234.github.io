@@ -222,3 +222,38 @@ section + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
   .news li { grid-template-columns: 1fr; gap: .1rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+
+/* ---------- robot build (index entry + /robot/ page) ---------- */
+a.thumb { color: inherit; }
+.rb {
+  max-width: 820px; margin: 0 auto;
+  padding: clamp(2.2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 2.4rem) 4rem;
+}
+.rb section + section, .rb-hero + section { margin-top: clamp(2.4rem, 5vw, 3.4rem); }
+.rb-back { font-family: var(--sans); font-size: .86rem; margin: 0 0 2rem; }
+.rb-back a { color: var(--muted); }
+.rb-back a:hover { color: var(--accent); }
+.rb-head .eyebrow { font-size: .78rem; color: var(--muted); }
+.rb-head h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.2; font-weight: 600;
+  letter-spacing: -.015em; margin: 0 0 1rem; text-wrap: balance;
+}
+.rb-lede { margin: 0; max-width: 64ch; color: var(--ink); text-wrap: pretty; }
+.rb code { font-size: .86em; background: var(--tag-bg); color: var(--tag-ink); padding: .05em .35em; border-radius: 4px; }
+
+.rb video, .rb img { display: block; width: 100%; border-radius: 8px; border: 1px solid var(--line); background: var(--thumb-a); }
+.rb figure { margin: 0; }
+.rb figcaption { font-family: var(--sans); font-size: .8rem; color: var(--muted); margin-top: .5rem; }
+.rb-hero { margin-top: 2rem; }
+.rb-hero video { aspect-ratio: 16 / 9; object-fit: cover; }
+
+.rb-prose p { margin: 0 0 .9rem; max-width: 64ch; text-wrap: pretty; }
+.rb-prose p:last-child { margin-bottom: 0; }
+
+/* build log: small tiles */
+.rb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+.rb-grid img, .rb-grid video { aspect-ratio: 4 / 3; object-fit: cover; height: auto; border-radius: 6px; }
+
+@media (max-width: 560px) {
+  .rb-grid { grid-template-columns: repeat(2, 1fr); }
+}
