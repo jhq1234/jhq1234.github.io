@@ -64,37 +64,16 @@ layout: default
       </ul>
     </section>
 
+    {%- assign selected = site.data.publications | where_exp: "x", "x.selected" | sort: "selected" -%}
+    {%- assign others = site.data.publications | where_exp: "x", "x.selected == nil" -%}
+    <section>
+      <p class="eyebrow">Selected Publications</p>
+      {%- for p in selected -%}{% include pub.html p=p %}{%- endfor -%}
+    </section>
+
     <section>
       <p class="eyebrow">Publications</p>
-      {%- for p in site.data.publications -%}
-      <article class="pub">
-        <div class="thumb{% if p.video and p.video != '' %} has-video{% endif %}">
-          {%- if p.video and p.video != "" -%}
-            <video class="hoverplay" src="{{ p.video | relative_url }}"
-                   muted loop playsinline preload="none" aria-label="{{ p.label }} preview"></video>
-            <img class="poster" src="{{ p.poster | relative_url }}" alt="{{ p.label }}" onerror="this.remove()">
-          {%- elsif p.thumb and p.thumb != "" -%}
-            <img class="fig" src="{{ p.thumb | relative_url }}" alt="{{ p.label }}">
-          {%- else -%}
-            <span>{{ p.label }}</span>
-          {%- endif -%}
-        </div>
-        <div class="pub-body">
-          <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
-          {%- capture bolded -%}<span class="me">{{ me }}</span>{%- endcapture -%}
-          <p class="authors">{{ p.authors | replace: me, bolded }}{% if p.note and p.note != "" %}<span class="note">{{ p.note }}</span>{% endif %}</p>
-          <p class="venue-line">{{ p.venue }}</p>
-          <div class="meta">
-            {%- if p.links and p.links.size > 0 -%}
-            <span class="pub-links">
-              {%- for lk in p.links -%}<a href="{{ lk.url }}">{{ lk.name }}</a>{%- endfor -%}
-            </span>
-            {%- endif -%}
-            {%- if p.award -%}<a class="award" href="{{ p.award.url }}">{{ p.award.text }}</a>{%- endif -%}
-          </div>
-        </div>
-      </article>
-      {%- endfor -%}
+      {%- for p in others -%}{% include pub.html p=p %}{%- endfor -%}
     </section>
 
     <section>
