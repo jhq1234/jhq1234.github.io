@@ -6,6 +6,7 @@
   --tag-bg:#edf6fb; --tag-ink:#315875; --thumb-a:#edf5f9; --thumb-b:#f5fbff; --award:#d7371f;
   --bar:#8ab7ce; --eyebrow:#537489; --h2:#253d4e; --h3:#243846; --lead:#273d4d;
   --authors:#415866; --venue:#637987; --date:#2d638f; --media-line:#c3d7e2; --link-line:#9dbbce;
+  --on-accent:#ffffff;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
@@ -14,7 +15,7 @@
     --line:#26394a; --line-soft:#1f2f3d; --accent:#7fb6e6; --accent-dim:#a9cff0;
     --tag-bg:#16222d; --tag-ink:#b3cbdc; --thumb-a:#16222d; --thumb-b:#0f1720; --award:#ff7a5c;
     --bar:#4f87a6; --eyebrow:#8fb0c6; --h2:#dbe7ef; --h3:#dbe7ef; --lead:#d3dfe8;
-    --authors:#b3c4d0; --venue:#93a9b8; --date:#7fb6e6; --media-line:#2b4152; --link-line:#3f6580;
+    --on-accent:#0f1720; --authors:#b3c4d0; --venue:#93a9b8; --date:#7fb6e6; --media-line:#2b4152; --link-line:#3f6580;
   }
 }
 :root[data-theme="dark"] {
@@ -22,7 +23,7 @@
   --line:#26394a; --line-soft:#1f2f3d; --accent:#7fb6e6; --accent-dim:#a9cff0;
   --tag-bg:#16222d; --tag-ink:#b3cbdc; --thumb-a:#16222d; --thumb-b:#0f1720; --award:#ff7a5c;
   --bar:#4f87a6; --eyebrow:#8fb0c6; --h2:#dbe7ef; --h3:#dbe7ef; --lead:#d3dfe8;
-  --authors:#b3c4d0; --venue:#93a9b8; --date:#7fb6e6; --media-line:#2b4152; --link-line:#3f6580;
+  --on-accent:#0f1720; --authors:#b3c4d0; --venue:#93a9b8; --date:#7fb6e6; --media-line:#2b4152; --link-line:#3f6580;
 }
 
 * { box-sizing: border-box; }
@@ -233,11 +234,58 @@ a.thumb { color: inherit; }
 .rb-hero { margin-top: 24px; }
 .rb-hero video { aspect-ratio: 16 / 9; object-fit: cover; }
 
-.rb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+/* CAD drawings: AutoCAD exports have a dark canvas, so keep it behind letterboxing */
+.rb-cad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+.rb-cad img { aspect-ratio: 4 / 3; height: auto; object-fit: contain; background: #212830; }
+.rb-cad .light img { background: #fff; }
+
+/* interactive 3D model */
+.r3d { margin: 14px 0 0; }
+.r3d-canvas {
+  position: relative; height: 440px; border: 1px solid var(--line); border-radius: 5px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 20%, var(--panel), var(--thumb-a)); touch-action: none;
+}
+.r3d-canvas canvas { display: block; width: 100%; height: 100%; }
+.r3d-loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--muted); font-size: 13px; }
+.r3d-tip {
+  position: absolute; z-index: 2; max-width: 220px; padding: 7px 9px; pointer-events: none;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 5px; box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  font-size: 12px; line-height: 1.4; color: var(--muted);
+}
+.r3d-tip strong { display: block; color: var(--ink); font-size: 13px; font-weight: 650; }
+.r3d-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-top: 8px; }
+.r3d-hint { color: var(--muted); font-size: 12px; }
+.r3d-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.r3d-btns button {
+  font: inherit; font-size: 12px; font-weight: 650; padding: 4px 10px; cursor: pointer;
+  color: var(--tag-ink); background: var(--tag-bg); border: 1px solid var(--line); border-radius: 999px;
+}
+.r3d-btns button[aria-pressed="true"] { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.r3d-btns button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ROS node graph */
+.rb-graph { margin: 18px 0 14px; padding: 14px 12px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--panel); }
+.rb-graph svg { display: block; width: 100%; height: auto; }
+.g-node { fill: var(--tag-bg); stroke: var(--bar); stroke-width: 1.2; }
+.g-ours { fill: var(--accent); stroke: var(--accent); }
+.g-ours + .g-t, .g-ours + .g-t + .g-s { fill: var(--on-accent); }
+.g-hw { fill: var(--panel); stroke: var(--ink); stroke-width: 1.2; }
+.g-tool { fill: var(--panel); stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.g-t { font-size: 13px; font-weight: 650; fill: var(--ink); text-anchor: middle; }
+.g-s { font-size: 11px; fill: var(--muted); text-anchor: middle; }
+.g-topic.g-l { text-anchor: start; }
+.g-topic.g-r { text-anchor: end; }
+.g-topic { font-size: 11px; font-weight: 650; fill: var(--date); text-anchor: middle; }
+.g-line { fill: none; stroke: var(--muted); stroke-width: 1.3; }
+.g-head { fill: var(--muted); }
+.rb-rviz video { max-height: 420px; object-fit: cover; }
+
+.rb-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .rb-grid img, .rb-grid video { aspect-ratio: 4 / 3; object-fit: cover; height: auto; }
 
 @media (max-width: 680px) {
   .rb { width: min(100% - 28px, 620px); margin: 24px auto 44px; }
   .rb-head h1 { font-size: 26px; }
-  .rb-grid { grid-template-columns: repeat(2, 1fr); }
+  .r3d-canvas { height: 320px; }
+  .rb-grid, .rb-cad { grid-template-columns: repeat(2, 1fr); }
 }

@@ -9,7 +9,7 @@ permalink: /robot/
   <header class="rb-head">
     <p class="eyebrow">Side Project · Undergraduate Capstone, 2021</p>
     <h1>Autonomous Water-Cleaning Robot for Low-Clearance Spaces</h1>
-    <p class="rb-lede">Spaces too low for a person to enter are hard to clean by hand. This tracked robot maps such a space with a 2D LiDAR, explores it on its own, and sprays water as it drives.</p>
+    <p class="rb-lede">In fertilizer plants and rice mills, sludge builds up in spaces whose openings are too low for a person to get through. This tracked robot drives into such a space, maps it with a 2D LiDAR, explores it on its own and washes the floor with a water spray. Tracks instead of wheels keep it from slipping on wet sludge.</p>
   </header>
 
   <figure class="rb-hero">
@@ -21,8 +21,76 @@ permalink: /robot/
   <section>
     <h2>Overview</h2>
     <div class="rb-prose">
-      <p>Our two-person team built this robot from scratch. We designed the tracked aluminium frame in CAD and machined it on a CNC, then put the battery, a Jetson Nano, the motor driver and a solenoid-valve water spray onto it. On the Jetson we set up ROS so the robot maps the space with a 2D LiDAR, explores it on its own and drives its motors over serial.</p>
+      <p>Our two-person team built this robot from scratch. We designed the tracked aluminium frame in CAD and machined it on a CNC, then put the battery, a Jetson Nano, the motor driver and a solenoid-valve water spray onto it. On the Jetson we set up ROS so the robot maps the space with a 2D LiDAR, explores it on its own and drives its motors over serial. The spray valve is switched through the motor driver's I/O, so it opens while the robot drives and closes as soon as it stops.</p>
     </div>
+  </section>
+
+  <section>
+    <h2>Hardware</h2>
+    <div class="rb-prose">
+      <p>An aluminium-profile frame with CNC-machined mounts carries two DC-motor-driven tracks, a waterproof electronics box and an RPLIDAR A3 on top.</p>
+    </div>
+    <figure class="r3d" id="robot3d">
+      <div class="r3d-canvas" role="img" aria-label="Interactive 3D model of the robot. Drag to rotate, scroll or pinch to zoom.">
+        <div class="r3d-tip" hidden></div>
+        <p class="r3d-loading">Loading 3D model&hellip;</p>
+      </div>
+      <div class="r3d-bar">
+        <span class="r3d-hint">Drag to rotate &middot; scroll to zoom &middot; hover a part</span>
+        <span class="r3d-btns">
+          <button type="button" data-r3d="explode" aria-pressed="false">Exploded view</button>
+          <button type="button" data-r3d="drive" aria-pressed="false">Drive tracks</button>
+          <button type="button" data-r3d="rotate" aria-pressed="false">Auto-rotate</button>
+          <button type="button" data-r3d="reset">Reset</button>
+        </span>
+      </div>
+      <figcaption>3D model rebuilt from the design dimensions and photos of the robot.</figcaption>
+    </figure>
+    <div class="rb-cad">
+        <figure><img src="{{ '/assets/robot/cad/sprocket_mount_motor.png' | relative_url }}" alt="Sprocket mount" loading="lazy"><figcaption>Sprocket mount</figcaption></figure>
+        <figure><img src="{{ '/assets/robot/cad/sprocket.png' | relative_url }}" alt="Drive sprocket" loading="lazy"><figcaption>Drive sprocket</figcaption></figure>
+        <figure><img src="{{ '/assets/robot/cad/hose_mount.png' | relative_url }}" alt="Hose-gun mount" loading="lazy"><figcaption>Hose-gun mount</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>ROS software</h2>
+    <div class="rb-prose">
+      <p>A SLAM module builds a map from the LiDAR scans and tracks the robot&rsquo;s position on it. Our path planner picks where to go next, and our motor interface turns the resulting velocity commands into motor commands while opening the spray valve only when the robot moves.</p>
+    </div>
+    <figure class="rb-graph">
+      <svg viewBox="0 0 860 350" role="img" aria-labelledby="rosT">
+        <title id="rosT">Software diagram. The LiDAR driver sends laser scans to SLAM, which builds the map and estimates the robot pose. Our path planner plans a path on that map, toward unexplored areas, along the walls, or through waypoints set by the operator. The path follower turns the path into velocity commands. Our motor interface sends them to the motor driver, which drives the motors and switches the solenoid valve.</title>
+        <defs><marker id="ra" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="g-head"/></marker></defs>
+        <!-- row 1: sensing and SLAM -->
+        <rect class="g-hw" x="10" y="30" width="140" height="48" rx="6"/><text class="g-t" x="80" y="59">RPLIDAR A3</text>
+        <rect class="g-node" x="215" y="30" width="150" height="48" rx="6"/><text class="g-t" x="290" y="59">LiDAR driver</text>
+        <rect class="g-node" x="430" y="30" width="170" height="48" rx="6"/><text class="g-t" x="515" y="59">SLAM</text>
+        <path class="g-line" d="M150 54H213" marker-end="url(#ra)"/><text class="g-s" x="182" y="47">USB</text>
+        <path class="g-line" d="M365 54H428" marker-end="url(#ra)"/><text class="g-topic" x="397" y="47">scans</text>
+        <path class="g-line" d="M515 78V148" marker-end="url(#ra)"/><text class="g-topic g-l" x="523" y="112">map + robot pose</text>
+        <!-- row 2: planning -->
+        <rect class="g-tool" x="10" y="150" width="140" height="52" rx="6"/><text class="g-t" x="80" y="172">Operator</text><text class="g-s" x="80" y="190">in RViz</text>
+        <rect class="g-ours" x="430" y="150" width="170" height="52" rx="6"/><text class="g-t" x="515" y="172">Path planner</text><text class="g-s" x="515" y="190">explore &middot; walls &middot; waypoints</text>
+        <rect class="g-node" x="670" y="150" width="180" height="52" rx="6"/><text class="g-t" x="760" y="172">Path follower</text><text class="g-s" x="760" y="190">path &rarr; speed and turn rate</text>
+        <path class="g-line" d="M150 176H428" marker-end="url(#ra)"/><text class="g-topic" x="289" y="169">waypoints</text>
+        <path class="g-line" d="M668 176H602" marker-end="url(#ra)"/><text class="g-s" x="635" y="169">request</text>
+        <path class="g-line" d="M602 190H668" marker-end="url(#ra)"/><text class="g-s" x="635" y="206">path</text>
+        <path class="g-line" d="M760 202V268" marker-end="url(#ra)"/><text class="g-topic g-r" x="752" y="240">velocity command</text>
+        <!-- row 3: actuation -->
+        <rect class="g-ours" x="670" y="270" width="180" height="52" rx="6"/><text class="g-t" x="760" y="292">Motor interface</text><text class="g-s" x="760" y="310">serial link, safety stop</text>
+        <rect class="g-hw" x="430" y="270" width="170" height="52" rx="6"/><text class="g-t" x="515" y="292">Motor driver</text><text class="g-s" x="515" y="310">PID speed control, I/O</text>
+        <rect class="g-hw" x="215" y="270" width="150" height="52" rx="6"/><text class="g-t" x="290" y="292">DC motors</text><text class="g-s" x="290" y="310">with encoders</text>
+        <rect class="g-hw" x="10" y="270" width="140" height="52" rx="6"/><text class="g-t" x="80" y="292">Solenoid valve</text><text class="g-s" x="80" y="310">via relay</text>
+        <path class="g-line" d="M670 296H602" marker-end="url(#ra)"/><text class="g-s" x="636" y="289">commands</text>
+        <path class="g-line" d="M430 296H367" marker-end="url(#ra)"/>
+        <path class="g-line" d="M515 322V338H80V324" marker-end="url(#ra)"/><text class="g-s" x="300" y="334">digital output: open while driving</text>
+      </svg>
+    </figure>
+    <figure class="rb-rviz">
+      <video class="autoplay" src="{{ '/assets/robot/slam_8x.mp4' | relative_url }}" poster="{{ '/assets/robot/slam_8x.jpg' | relative_url }}" muted loop playsinline preload="none" aria-label="RViz: the map grows as the robot explores"></video>
+      <figcaption>RViz during a run: the map built by SLAM, the planned path and the waypoints (8&times; speed).</figcaption>
+    </figure>
   </section>
 
   <section>
@@ -30,7 +98,6 @@ permalink: /robot/
     <div class="rb-grid">
       <figure><img src="{{ '/assets/robot/build.jpg' | relative_url }}" alt="Assembled robot frame with tracks and enclosure" loading="lazy"></figure>
       <figure><video class="autoplay" src="{{ '/assets/robot/spray_test.mp4' | relative_url }}" poster="{{ '/assets/robot/spray_test.jpg' | relative_url }}" muted loop playsinline preload="none" aria-label="Robot spraying water while driving"></video></figure>
-      <figure><video class="autoplay" src="{{ '/assets/robot/slam_8x.mp4' | relative_url }}" poster="{{ '/assets/robot/slam_8x.jpg' | relative_url }}" muted loop playsinline preload="none" aria-label="RViz map growing during exploration"></video></figure>
     </div>
   </section>
 
@@ -50,4 +117,19 @@ permalink: /robot/
     }, { threshold: 0.25 });
     vids.forEach(function (v) { io.observe(v); });
   })();
+</script>
+
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+</script>
+<script type="module">
+  const root = document.getElementById('robot3d');
+  const start = () => import('{{ '/assets/robot/robot3d.js' | relative_url }}')
+    .then(m => { m.mountRobot(root); root.querySelector('.r3d-loading')?.remove(); })
+    .catch(() => { root.querySelector('.r3d-loading').textContent = '3D view could not be loaded.'; });
+  const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { io.disconnect(); start(); } }, { rootMargin: '200px' });
+  io.observe(root);
 </script>
