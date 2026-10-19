@@ -71,9 +71,10 @@ export function mountRobot(root) {
   // Each part group has a name/description for the hover label and an
   // offset used by the exploded view.
   const parts = [];
-  function part(name, desc, explode) {
+  // drawings: ids of the CAD outlines in #part-drawings, shown over the viewer when the part is clicked
+  function part(name, desc, explode, drawings) {
     const g = new THREE.Group();
-    g.userData = { name, desc, explode: explode || new THREE.Vector3() };
+    g.userData = { name, desc, explode: explode || new THREE.Vector3(), drawings: drawings || [] };
     scene.add(g); parts.push(g);
     return g;
   }
@@ -121,7 +122,8 @@ export function mountRobot(root) {
   const linkGeo = new THREE.BoxGeometry(LINK - 2, 9, TRACK_W);
   const tracks = [];
   for (const side of [1, -1]) {
-    const g = part(side > 0 ? 'Track (right)' : 'Track (left)', 'Chain track with sprockets and road wheels, for grip on wet, sludgy floors', new THREE.Vector3(0, 0, side * 150));
+    const g = part(side > 0 ? 'Track (right)' : 'Track (left)', 'Chain track with sprockets and road wheels, for grip on wet, sludgy floors', new THREE.Vector3(0, 0, side * 150),
+      ['sprocket', 'shaft', 'road_wheel', 'road_wheel_bracket', 'track_support']);
     const inst = new THREE.InstancedMesh(linkGeo, M.track, nLinks);
     inst.castShadow = true; inst.receiveShadow = true;
     g.add(inst);
@@ -162,12 +164,13 @@ export function mountRobot(root) {
   placeLinks(0);
 
   // ---------- frame: 2 x 670 side rails + 6 x 400 cross members ----------
-  const frame = part('Aluminium frame', '30 × 30 mm profile: 2 × 670 mm side rails and 6 × 400 mm cross members', new THREE.Vector3());
+  const frame = part('Aluminium frame', 'Off-the-shelf 30 × 30 mm profile: 2 × 670 mm side rails and 6 × 400 mm cross members', new THREE.Vector3());
   for (const side of [1, -1]) add(frame, new THREE.BoxGeometry(670, 30, 30), M.alu, 0, 115, side * 215, true);
   for (const x of [-320, -200, -80, 40, 160, 300]) add(frame, new THREE.BoxGeometry(30, 30, 400), M.alu, x, 115, 0, true);
 
   // ---------- sprocket mounts: triangular plates joining rail, sprocket and lower wheel ----------
-  const mounts = part('Sprocket mounts', 'CNC-machined 6061 aluminium plates that hold the sprockets, motors and encoders', new THREE.Vector3(0, 0, 0));
+  const mounts = part('Sprocket mounts', 'CNC-machined 6061 aluminium plates that hold the sprockets, motors and encoders', new THREE.Vector3(0, 0, 0),
+    ['sprocket_mount_motor', 'sprocket_mount_encoder']);
   function plateShape(pts, r) {
     // rounded convex outline around three points
     const sh = new THREE.Shape(), n = pts.length;
@@ -193,12 +196,12 @@ export function mountRobot(root) {
   }
 
   // ---------- drive motors (rear) and encoders (front) ----------
-  const motors = part('Drive motors', '24 V geared DC motors (IG52, 100 kgf·cm rated torque), one per track', new THREE.Vector3(-110, 0, 0));
+  const motors = part('Drive motors', '24 V geared DC motors (IG52, 100 kgf·cm rated torque), one per track', new THREE.Vector3(-110, 0, 0), ['motor_mount']);
   for (const side of [1, -1]) {
     add(motors, new THREE.CylinderGeometry(26, 26, 40, 32).rotateX(Math.PI / 2), M.alu, -360, 95, side * 205, false);
     add(motors, new THREE.CylinderGeometry(26, 26, 120, 32).rotateX(Math.PI / 2), M.black, -360, 95, side * 125, false);
   }
-  const encoders = part('Encoders', 'Wheel encoders on the front sprocket shafts', new THREE.Vector3(90, 0, 0));
+  const encoders = part('Encoders', 'Wheel encoders on the front sprocket shafts', new THREE.Vector3(90, 0, 0), ['encoder_mount']);
   for (const side of [1, -1]) add(encoders, new THREE.CylinderGeometry(16, 16, 36, 24).rotateX(Math.PI / 2), M.black, 360, 95, side * 196, false);
 
   // ---------- electronics box and LiDAR ----------
@@ -208,13 +211,13 @@ export function mountRobot(root) {
   for (const z of [-80, 80]) add(box, new THREE.BoxGeometry(14, 22, 20), M.box, 125, 268, z, false);
   for (const z of [-40, -10]) add(box, new THREE.CylinderGeometry(7, 7, 16, 16).rotateZ(Math.PI / 2), M.black, -188, 180, z, false);
 
-  const lidar = part('RPLIDAR A3', '2D laser scanner (up to 25 m range) used for SLAM and exploration', new THREE.Vector3(0, 200, 0));
+  const lidar = part('RPLIDAR A3', '2D laser scanner (up to 25 m range) used for SLAM and exploration', new THREE.Vector3(0, 200, 0), ['lidar_plate']);
   add(lidar, new THREE.CylinderGeometry(22, 22, 12, 24), M.black, 0, 298, 0, false);
   add(lidar, new THREE.CylinderGeometry(38, 38, 26, 40), M.black, 0, 317, 0, false);
   add(lidar, new THREE.CylinderGeometry(36, 38, 15, 40), M.lidarRing, 0, 337.5, 0, false);
 
   // ---------- water spray: solenoid valve, hoses, hose gun ----------
-  const valve = part('Solenoid valve', 'Switched by the motor driver’s digital output: open only while the robot drives', new THREE.Vector3(-170, 0, 0));
+  const valve = part('Solenoid valve', 'Switched by the motor driver’s digital output: open only while the robot drives', new THREE.Vector3(-170, 0, 0), ['valve_mount']);
   add(valve, new THREE.BoxGeometry(46, 30, 34), M.brass, -392, 92, 0, false);
   add(valve, new THREE.CylinderGeometry(15, 15, 32, 24), M.black, -392, 123, 0, false);
 
@@ -224,7 +227,7 @@ export function mountRobot(root) {
   const line = tube([[-392, 108, 18], [-350, 150, 120], [-180, 150, 185], [120, 150, 170], [260, 140, 60], [318, 126, 0]], 6, M.clear);
   for (const m of [supply, line]) { m.castShadow = true; hoses.add(m); }
 
-  const gun = part('Hose gun', 'Spray nozzle on an aluminium mount, aimed at the floor ahead of the robot', new THREE.Vector3(140, 40, 0));
+  const gun = part('Hose gun', 'Spray nozzle on an aluminium mount, aimed at the floor ahead of the robot', new THREE.Vector3(140, 40, 0), ['hose_mount']);
   add(gun, new THREE.BoxGeometry(8, 50, 44), M.plate, 319, 112, 0, true);
   const body = add(gun, new THREE.CylinderGeometry(13, 13, 80, 24).rotateZ(Math.PI / 2), M.green, 360, 122, 0, false);
   body.rotation.z = -0.25;
@@ -259,7 +262,8 @@ export function mountRobot(root) {
     while (g && !parts.includes(g)) g = g.parent;
     setHover(g);
     if (g) {
-      tip.innerHTML = '<strong>' + g.userData.name + '</strong><span>' + g.userData.desc + '</span>';
+      tip.innerHTML = '<strong>' + g.userData.name + '</strong><span>' + g.userData.desc + '</span>' +
+        (g.userData.drawings.length ? '<em>Click to see its drawing</em>' : '');
       tip.style.left = Math.min(ev.clientX - r.left + 14, r.width - 230) + 'px';
       tip.style.top = Math.max(ev.clientY - r.top - 10, 6) + 'px';
       tip.hidden = false;
@@ -269,12 +273,52 @@ export function mountRobot(root) {
       renderer.domElement.style.cursor = '';
     }
   }
+  function btn(name) { return root.querySelector('[data-r3d="' + name + '"]'); }
+  function press(b, on) { if (b) b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+
+  const panel = root.querySelector('.r3d-overlay');
+  const drawings = document.getElementById('part-drawings');
+  function closePanel() { if (panel) panel.hidden = true; }
+  function openPanel(g) {
+    if (!panel) return;
+    panel.querySelector('.r3d-ov-title').textContent = g.userData.name;
+    const list = panel.querySelector('.r3d-ov-list');
+    list.textContent = '';
+    for (const id of g.userData.drawings) {
+      const src = drawings && drawings.content.querySelector('[data-id="' + id + '"]');
+      if (!src) continue;
+      const fig = document.createElement('figure');
+      const box = document.createElement('div');
+      box.className = 'part-fig';
+      box.appendChild(src.querySelector('svg').cloneNode(true));
+      const cap = document.createElement('figcaption');
+      cap.innerHTML = '<strong>' + src.dataset.name + '</strong>' + src.dataset.size;
+      fig.style.animationDelay = (list.children.length * 50) + 'ms';
+      fig.append(box, cap); list.appendChild(fig);
+    }
+    if (!list.children.length) {
+      const p = document.createElement('p'); p.className = 'r3d-ov-none';
+      p.textContent = 'Off-the-shelf part, no custom drawing.'; list.appendChild(p);
+    }
+    panel.hidden = false;
+  }
+  panel?.querySelector('.r3d-close').addEventListener('click', closePanel);
+  root.addEventListener('keydown', ev => { if (ev.key === 'Escape') closePanel(); });
+
+  // a click is a press and release without dragging the view
+  let down = null;
+  renderer.domElement.addEventListener('pointerdown', ev => { down = [ev.clientX, ev.clientY]; });
+  renderer.domElement.addEventListener('pointerup', ev => {
+    if (!down || Math.hypot(ev.clientX - down[0], ev.clientY - down[1]) > 6) return;
+    onPointer(ev);
+    if (hovered) { openPanel(hovered); tip.hidden = true; controls.autoRotate = false; press(btn('rotate'), false); }
+    else closePanel();
+  });
+
   renderer.domElement.addEventListener('pointermove', onPointer);
   renderer.domElement.addEventListener('pointerdown', onPointer);
   renderer.domElement.addEventListener('pointerleave', () => { setHover(null); tip.hidden = true; });
 
-  const btn = name => root.querySelector('[data-r3d="' + name + '"]');
-  const press = (b, on) => b && b.setAttribute('aria-pressed', on ? 'true' : 'false');
   press(btn('rotate'), controls.autoRotate); press(btn('drive'), driving);
   btn('rotate')?.addEventListener('click', () => { controls.autoRotate = !controls.autoRotate; press(btn('rotate'), controls.autoRotate); });
   btn('explode')?.addEventListener('click', () => { explodeTarget = explodeTarget ? 0 : 1; press(btn('explode'), explodeTarget); });

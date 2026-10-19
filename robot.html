@@ -2,6 +2,19 @@
 layout: default
 title: Robot Build · Jangho Park
 permalink: /robot/
+parts:
+  - { id: sprocket_mount_motor, name: "Sprocket mount, motor side", size: "131 × 176 mm" }
+  - { id: sprocket_mount_encoder, name: "Sprocket mount, encoder side", size: "176 × 131 mm" }
+  - { id: motor_mount, name: "Motor mount", size: "61 × 96 mm" }
+  - { id: encoder_mount, name: "Encoder mount", size: "47 × 54 mm" }
+  - { id: sprocket, name: "Drive sprocket", size: "Ø 61 mm" }
+  - { id: shaft, name: "Sprocket shaft", size: "59 × 20 mm" }
+  - { id: road_wheel, name: "Road wheel", size: "Ø 50 mm" }
+  - { id: road_wheel_bracket, name: "Road-wheel bracket", size: "57 × 87 mm" }
+  - { id: track_support, name: "Track support", size: "587 × 47 mm" }
+  - { id: hose_mount, name: "Hose-gun mount", size: "77 × 87 mm" }
+  - { id: valve_mount, name: "Solenoid-valve mount", size: "87 × 72 mm" }
+  - { id: lidar_plate, name: "LiDAR plate", size: "157 × 83 mm" }
 ---
 <div class="rb">
   <p class="rb-back"><a href="{{ '/' | relative_url }}">&larr; Jangho Park</a></p>
@@ -33,10 +46,15 @@ permalink: /robot/
     <figure class="r3d" id="robot3d">
       <div class="r3d-canvas" role="img" aria-label="Interactive 3D model of the robot. Drag to rotate, scroll or pinch to zoom.">
         <div class="r3d-tip" hidden></div>
+<div class="r3d-overlay" hidden aria-live="polite">
+          <p class="r3d-ov-title"></p>
+          <div class="r3d-ov-list"></div>
+          <button type="button" class="r3d-close" aria-label="Close drawings">&times;</button>
+        </div>
         <p class="r3d-loading">Loading 3D model&hellip;</p>
       </div>
       <div class="r3d-bar">
-        <span class="r3d-hint">Drag to rotate &middot; scroll to zoom &middot; hover a part</span>
+        <span class="r3d-hint">Drag to rotate &middot; scroll to zoom &middot; click a part to see its drawing</span>
         <span class="r3d-btns">
           <button type="button" data-r3d="explode" aria-pressed="false">Exploded view</button>
           <button type="button" data-r3d="drive" aria-pressed="false">Drive tracks</button>
@@ -44,13 +62,14 @@ permalink: /robot/
           <button type="button" data-r3d="reset">Reset</button>
         </span>
       </div>
-      <figcaption>3D model rebuilt from the design dimensions and photos of the robot.</figcaption>
+      <figcaption>3D model rebuilt from the design dimensions and photos of the robot. Click a part to see the CAD drawings of the parts we designed for it.</figcaption>
     </figure>
-    <div class="rb-cad">
-        <figure><img src="{{ '/assets/robot/cad/sprocket_mount_motor.png' | relative_url }}" alt="Sprocket mount" loading="lazy"><figcaption>Sprocket mount</figcaption></figure>
-        <figure><img src="{{ '/assets/robot/cad/sprocket.png' | relative_url }}" alt="Drive sprocket" loading="lazy"><figcaption>Drive sprocket</figcaption></figure>
-        <figure><img src="{{ '/assets/robot/cad/hose_mount.png' | relative_url }}" alt="Hose-gun mount" loading="lazy"><figcaption>Hose-gun mount</figcaption></figure>
-    </div>
+    <template id="part-drawings">
+      {%- for p in page.parts -%}
+      {%- capture f %}parts/{{ p.id }}.svg{% endcapture %}
+      <div data-id="{{ p.id }}" data-name="{{ p.name }}" data-size="{{ p.size }}">{% include {{ f }} %}</div>
+      {%- endfor %}
+    </template>
   </section>
 
   <section>
