@@ -26,7 +26,7 @@ links:
   - { key: Scholar, name: Google Scholar,    url: "https://scholar.google.com/citations?user=OC9JTDMAAAAJ&hl=en" }
   - { key: Code,    name: GitHub,            url: "https://github.com/jhq1234" }
   - { key: Prof,    name: LinkedIn,          url: "https://www.linkedin.com/in/jhpark9916/" }
-  - { key: Doc,     name: Curriculum Vitae,  url: "https://drive.google.com/file/d/1_48msCSdWQFongXfuNVTxJJ7zVGWcBbt/view" }
+  - { key: Doc,     name: Curriculum Vitae,  url: "https://drive.google.com/file/d/1YngVjXGuD0nuzrtd1wZ2UaLBut8AUvhQ/view?usp=sharing" }
 
 # --- Academic service ---
 service: "NeurIPS 2025, 2026 &middot; ICLR 2025, 2026 &middot; ICCV 2025 &middot; CVPR 2026 &middot; ECCV 2026 &middot; SIGGRAPH Asia 2026"
