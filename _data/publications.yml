@@ -8,8 +8,21 @@
 #   award   : optional { text, url } shown in color after the links, e.g. an oral or a paper award
 #   selected: optional number; listed under "Selected Publications" in that order, the rest under "Publications"
 
-- title: "Don't Throw Away the Tail: Action Upcycling for Policy Acceleration"
+- title: "MemJev: Training Jev for Hierarchical Action Policy with Recurrent Visual Memory"
   selected: 1
+  authors: "Jangho Park, Beomsu Kim, Gihyun Kwon†, Jong Chul Ye†"
+  note: "† Co-corresponding authors"
+  venue: "arXiv preprint, 2026."
+  thumb: ""
+  label: "MemJev"
+  video: "assets/media/memjev_shell_2x.mp4"
+  poster: "assets/media/memjev_shell.jpg"
+  url: "https://memjev.github.io/"
+  links:
+    - { name: Project, url: "https://memjev.github.io/" }
+
+- title: "Don't Throw Away the Tail: Action Upcycling for Policy Acceleration"
+  selected: 2
   authors: "Taesung Kwon*, Jangho Park*, Sunwoo Park, Youngmin Kim, Seonghyun Jin, Youngjun Jun, Kyumin Choi, Jong Chul Ye"
   note: "* Equal contribution"
   venue: "arXiv preprint, 2026."
@@ -64,7 +77,7 @@
     - { name: Project, url: "https://methoder00.github.io/DPP/" }
 
 - title: "FlowLong: Inference-time Long Video Generation via Manifold-constrained Tweedie Matching"
-  selected: 2
+  selected: 3
   authors: "Jangho Park*, Geon Yeong Park*, Gihyun Kwon, Jong Chul Ye"
   note: "* Equal contribution"
   venue: "arXiv preprint, 2026."
@@ -80,7 +93,7 @@
     - { name: Project, url: "https://flowlong-video.github.io/" }
 
 - title: "Zero4D: Training-Free 4D Video Generation From a Single Video Using Off-the-Shelf Video Diffusion"
-  selected: 3
+  selected: 4
   authors: "Jangho Park, Taesung Kwon, Jong Chul Ye"
   venue: "IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Findings, 2026."
   thumb: ""
@@ -107,7 +120,7 @@
     - { name: Project, url: "https://unifyediting.github.io/" }
 
 - title: "ED-NeRF: Efficient Text-guided Editing of 3D Scene Using Latent Space NeRF"
-  selected: 4
+  selected: 5
   authors: "Jangho Park*, Gihyun Kwon*, Jong Chul Ye"
   note: "* Equal contribution"
   venue: "International Conference on Learning Representations (ICLR), 2024."
