@@ -13,8 +13,10 @@
   authors: "Jangho Park, Beomsu Kim, Gihyun Kwon†, Jong Chul Ye†"
   note: "† Co-corresponding authors"
   venue: "arXiv preprint, 2026."
-  thumb: "assets/img/thumb/memjev_pipeline.jpg"
+  thumb: ""
   label: "MemJev"
+  video: "assets/media/memjev_method_2x.mp4"
+  poster: "assets/media/memjev_method.jpg"
   url: "https://memjev.github.io/"
   links:
     - { name: Project, url: "https://memjev.github.io/" }
